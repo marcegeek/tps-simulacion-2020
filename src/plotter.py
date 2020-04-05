@@ -17,7 +17,7 @@ class Figure(mplfig.Figure):
     def __init__(self):
         super().__init__()
 
-    def render(self, latexfile=None, standalone_latex=False):
+    def render(self, latexfile=None):
         for ax in self.axes:
             self._axes_legend(ax)
         if latexfile is None:
@@ -41,7 +41,7 @@ class Figure(mplfig.Figure):
                                                      'xticklabel style={/pgf/number format/.cd,fixed,precision=2}',
                                                      'yticklabel style={/pgf/number format/.cd,fixed,precision=2}'
                                                  ],
-                                                 standalone=standalone_latex)
+                                                 axis_width=r'\figW')
             with open(latexfile, 'w') as f:
                 f.write(tikzcode)
 
