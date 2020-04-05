@@ -48,7 +48,8 @@ class Figure(mplfig.Figure):
     def show(self, warn=True):
         self.render()
 
-    def _axes_legend(self, ax):
+    @staticmethod
+    def _axes_legend(ax):
         has_labels = False
         for line in ax.lines:
             label = line.get_label()
@@ -68,8 +69,7 @@ class Figure(mplfig.Figure):
                     has_labels = True
                     break
         if has_labels:
-            ax.legend(loc='upper left', bbox_to_anchor=(1.01, 0.99), fancybox=True)
-            self.set_tight_layout(True)
+            ax.legend(fancybox=True, framealpha=0.5)
 
 
 class SimpleFigure(Figure):
