@@ -1,5 +1,6 @@
 import numpy as np
 
+import latex
 from src.plotter import SimpleFigure
 
 
@@ -23,12 +24,12 @@ def ruleta(n_min=0, n_max=36, max_size=1000, x=18):
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$f_{r}$ (frecuencia relativa)')
     fig.ax.plot(n, freq_x, label='$f_{{r}}$ (frecuencia relativa de ${}$)'.format(x))
     fig.ax.plot(n, expected_freq, label='$f_{{r_{{e}}}}$ (frecuencia relativa esperada de ${}$)'.format(x))
-    fig.show()
+    fig.render(latexfile=latex.PATH.joinpath('tp1-frecuencia.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{p}$ (valor promedio)')
     fig.ax.plot(n, means, label='$v_{p}$ (valor promedio de las tiradas)')
     fig.ax.plot(n, expected_mean, label='$v_{p_{e}}$ (valor promedio esperado)')
-    fig.show()
+    fig.render(latexfile=latex.PATH.joinpath('tp1-promedio.tex'))
 
 
 def main():

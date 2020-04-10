@@ -1,0 +1,12 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mytikz}
+
+\RequirePackage{pgfplots}
+
+\newlength\figW
+\setlength{\figW}{\textwidth} % default width
+\newenvironment{mytikzresize}[1]
+{\setlength{\figW}{#1}}
+{}
+
+\endinput
