@@ -2,6 +2,7 @@ import numpy as np
 
 import latex
 from src.plotter import SimpleFigure
+from latex.tp1 import tp1_ruleta as tp_latex
 
 
 def ruleta(n_min=0, n_max=36, max_size=5000, x=18, runs=10, seed=None):
@@ -46,46 +47,46 @@ def ruleta(n_min=0, n_max=36, max_size=5000, x=18, runs=10, seed=None):
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$f_{r}$ (frecuencia relativa)')
     fig.ax.plot(n, freqs_list[0], label='$f_{{r}}$ (frecuencia relativa de ${}$)'.format(x))
     fig.ax.plot(n, expected_freq, label='$f_{{r_{{e}}}}$ (frecuencia relativa esperada de ${}$)'.format(x), linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-frecuencia.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'frecuencia.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{p}$ (valor promedio)')
     fig.ax.plot(n, means_list[0], label='$v_{p}$ (valor promedio de las tiradas)')
     fig.ax.plot(n, expected_mean, label='$v_{p_{e}}$ (valor promedio esperado)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-promedio.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'promedio.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{d}$ (valor del desvío)')
     fig.ax.plot(n, deviations_list[0], label='$v_{d}$ (valor del desvío de las tiradas)')
     fig.ax.plot(n, expected_deviation, label='$v_{d_{e}}$ (valor del desvío esperado)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-desvio.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'desvio.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{d}$ (valor de la varianza)')
     fig.ax.plot(n, variances_list[0], label='$v_{v}$ (valor de la varianza de las tiradas)')
     fig.ax.plot(n, expected_variance, label='$v_{v_{e}}$ (valor de la varianza esperada)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-varianza.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'varianza.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$f_{r}$ (frecuencia relativa)')
     for fr in freqs_list:
         fig.ax.plot(n, fr)
     fig.ax.plot(n, expected_freq, label='$f_{{r_{{e}}}}$ (frecuencia relativa esperada de ${}$)'.format(x), linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-frecuencia-multi.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'frecuencia-multi.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{p}$ (valor promedio)')
     for m in means_list:
         fig.ax.plot(n, m)
     fig.ax.plot(n, expected_mean, label='$v_{p_{e}}$ (valor promedio esperado)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-promedio-multi.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'promedio-multi.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{d}$ (valor del desvío)')
     for d in deviations_list:
         fig.ax.plot(n, d)
     fig.ax.plot(n, expected_deviation, label='$v_{d_{e}}$ (valor del desvío esperado)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-desvio-multi.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'desvio-multi.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{d}$ (valor de la varianza)')
     for v in variances_list:
         fig.ax.plot(n, v)
     fig.ax.plot(n, expected_variance, label='$v_{v_{e}}$ (valor de la varianza esperada)', linestyle='dashed')
-    fig.render(latexfile=latex.PATH.joinpath('tp1-varianza-multi.tex'))
+    fig.render(latexfile=latex.makefilepath(tp_latex, 'varianza-multi.tex'))
 
 
 def main():
