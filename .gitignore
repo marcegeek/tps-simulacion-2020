@@ -392,3 +392,6 @@ TSWLatexianTemp*
 
 # generated files
 generated/
+
+# TikZ externalization cache
+tikzcache/
