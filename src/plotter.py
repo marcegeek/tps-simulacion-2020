@@ -1,3 +1,5 @@
+import sys
+
 import matplotlib
 import matplotlib.figure as mplfig
 
@@ -9,7 +11,11 @@ import tkinter as tk
 
 import tikzplotlib  # generación de código PGF/TikZ para LaTeX
 
-matplotlib.use('TkAgg')
+try:
+    matplotlib.use('TkAgg')
+    HEADLESS_MODE = False
+except ImportError:
+    HEADLESS_MODE = True
 
 
 class Figure(mplfig.Figure):
@@ -21,6 +27,9 @@ class Figure(mplfig.Figure):
         for ax in self.axes:
             self._axes_legend(ax)
         if latexfile is None:
+            if HEADLESS_MODE:
+                print("Warning: running in headless mode, won't show anything", file=sys.stdout)
+                return
             win = tk.Tk()
             win.title('Figure')
 
