@@ -41,7 +41,8 @@ class Figure(mplfig.Figure):
                                                      'xticklabel style={/pgf/number format/.cd,fixed,precision=2}',
                                                      'yticklabel style={/pgf/number format/.cd,fixed,precision=2}'
                                                  ],
-                                                 axis_width=r'\figW')
+                                                 axis_width=r'\figW',
+                                                 float_format='.5g')
             with open(latexfile, 'w') as f:
                 f.write(tikzcode)
 
