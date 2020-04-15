@@ -4,7 +4,7 @@ import latex
 from src.plotter import SimpleFigure
 
 
-def ruleta(n_min=0, n_max=36, max_size=1000, x=18, runs=10, seed=None):
+def ruleta(n_min=0, n_max=36, max_size=5000, x=18, runs=10, seed=None):
     random_state = np.random.RandomState(seed)
     spins_list = [
         random_state.randint(n_min, n_max + 1, size=max_size)
