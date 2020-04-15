@@ -4,9 +4,10 @@ import latex
 from src.plotter import SimpleFigure
 
 
-def ruleta(n_min=0, n_max=36, max_size=1000, x=18, runs=10):
+def ruleta(n_min=0, n_max=36, max_size=1000, x=18, runs=10, seed=None):
+    random_state = np.random.RandomState(seed)
     spins_list = [
-        np.random.randint(n_min, n_max + 1, size=max_size)
+        random_state.randint(n_min, n_max + 1, size=max_size)
         for _ in range(runs)
     ]
 
@@ -88,7 +89,8 @@ def ruleta(n_min=0, n_max=36, max_size=1000, x=18, runs=10):
 
 
 def main():
-    ruleta()
+    # fijar la semilla para asegurar la repetibilidad del código
+    ruleta(seed=1262280577)
 
 
 if __name__ == '__main__':
