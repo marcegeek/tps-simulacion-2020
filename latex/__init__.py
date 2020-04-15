@@ -1,7 +1,18 @@
 import pathlib as pl
 
 ROOT_PATH = pl.Path(__file__).parent
+TIKZ_CACHE_DIR = 'tikzcache'
+
+
+def _makedirs(module_dir):
+    # asegurar existencia de directorios, module_dir ya existe
+    gen_dir = module_dir.joinpath('generated')
+    tikz_cache_dir = module_dir.joinpath(TIKZ_CACHE_DIR)
+    gen_dir.mkdir(exist_ok=True)
+    tikz_cache_dir.mkdir(exist_ok=True)
+    return gen_dir
 
 
 def makefilepath(module, file):
-    return pl.Path(module.__file__).parent.joinpath('generated').joinpath(file)
+    module_dir = pl.Path(module.__file__).parent
+    return _makedirs(module_dir).joinpath(file)
