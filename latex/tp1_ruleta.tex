@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}             % allow utf-8 input
 \usepackage[spanish]{babel}             % idioma español
 \usepackage[T1]{fontenc}                % use 8-bit T1 fonts
-\usepackage[pdfencoding=auto]{hyperref} % hyperlinks
+\usepackage[pdfencoding=auto]{hyperref} % hyperlinks, fixed PDF encoding on LuaLaTeX
 \usepackage{url}                        % simple URL typesetting
 \usepackage{booktabs}                   % professional-quality tables
 \usepackage{amsfonts}                   % blackboard math symbols
@@ -15,6 +15,7 @@
 \graphicspath{ {./images/} }
 \usepackage{kpfonts}                    % use the same fonts for text and maths
 
+\usepackage{float}                      % force figure placement with the `H' float specifier
 \usepackage{pgfplots}                   % TikZ graphics
 \pgfplotsset{compat=1.15}
 
@@ -29,6 +30,7 @@
 \author{
  Marcelo G. Catellano \\
   UTN -- FRRo \\
+  Legajo 39028 \\
   \texttt{marce.geek22@gmail.com} \\
 }
 
@@ -39,9 +41,9 @@ Simulación de un modelo simple de una ruleta empleando el lenguaje de programac
 \end{abstract}
 
 % keywords can be removed
-%\keywords{First keyword \and Second keyword \and More}
+\keywords{Simulación \and Trabajo práctico \and Ruleta \and Números aleatorios \and Estadística descriptiva \and Python 3.x}
 
-\section[Introducción]{Introducción\footnote{Wikipedia - \url{https://es.wikipedia.org/wiki/Ruleta}}}
+\section[Introducción]{Introducción \cite{wiki-ruleta}}
 La ruleta es un juego de azar típico de los casinos, cuyo nombre viene del término francés roulette, que significa ``ruedita'' o ``rueda pequeña''. Su uso como elemento de juego de azar, aún en configuraciones distintas de la actual, no está documentado hasta bien entrada la Edad Media. Es de suponer que su referencia más antigua es la llamada Rueda de la Fortuna, de la que hay noticias a lo largo de toda la historia, prácticamente en todos los campos del saber humano.
 
 La ``magia'' del movimiento de las ruedas tuvo que impactar a todas las generaciones. La aparente quietud del centro, el aumento de velocidad conforme nos alejamos de él, la posibilidad de que se detenga en un punto al azar; todo esto tuvo que influir en el desarrollo de distintos juegos que tienen la rueda como base.
@@ -56,8 +58,62 @@ En 1842, los hermanos Blanc modificaron la ruleta añadiéndole un nuevo número
 
 Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosajones) se añadió un nuevo número (el doble cero), con lo cual el beneficio para el casino resultó ser doble (2/38 o $5.26\%$).
 
+\section{Descripción del trabajo a realizar}
+En este trabajo se realizará la simulación del comportamiento de una ruleta tipo Montecarlo (números del 0 al 36, 37 números en total) mediante la generación de números aleatorios en el lenguaje de programación Python 3.x. Se asumirá una distribución de probabilidad uniforme discreta.
+
+Para el trabajo se generarán 10 poblaciones aleatorias de 5000 tiradas de la ruleta cada una. Luego se calcularán las frecuencias relativas, promedios, desvíos y varianzas para todas las poblaciones con respecto al número de tiradas (1 a 5000). A continuación, se graficarán los resultados, primero para una de las poblaciones, la primera generada, y luego se realizarán gráficas agregando los resultados para todas las poblaciones simultáneamente.
+
+Finalmente, se realizarán las conclusiones a partir de la información extraída de las gráficas.
+
+\section{Estadísticas}
+\subsection{Distribución uniforme discreta \cite{wiki-uniforme-discreta}}
+La distribución uniforme discreta es una distribución de probabilidad simétrica en la que un número finito de valores tienen la misma probabilidad de ser observados; cada uno de los $n$ valores tiene la misma probabilidad $1/n$.
+
+La distribución uniforme discreta en sí resulta inherentemente no paramétrica. Es conveniente, sin embargo, representar sus valores de manera general como todos los enteros dentro de un intervalo $[a,b]$, de manera que $a$ y $b$ se convierten en los parámetros principales de la distribución.
+
+Función de probabilidad:
+\begin{equation}
+p_X(x_i) = P(X = x_i) = \frac{1}{n}
+\end{equation}
+
+Esperanza matemática:
+\begin{equation}
+\operatorname{E}[X] = \frac{a+b}{2}
+\end{equation}
+
+Varianza:
+\begin{equation}
+\operatorname{Var}(X) = \sigma^{2} = \frac{(b-a+1)^{2}-1}{12}
+\end{equation}
+
+Desvío estándar:
+\begin{equation}
+\sigma = \sqrt{\operatorname{Var}(X)} = \sqrt{\frac{(b-a+1)^{2}-1}{12}}
+\end{equation}
+
+\subsection{Fórmulas muestrales}
+Frecuencia relativa \cite{wiki-frecuencia}
+\begin{equation}
+f_{i} = f_{r}(x_{i}) = \frac {n_{i}}{N}
+\end{equation}
+
+Esperanza matemática \cite{wiki-esperanza}:
+\begin{equation}
+\operatorname{E}[X] = \sum_{i=1}^{n}x_{i}\,f_{i}=x_{1}f_{1}+x_{2}f_{2}+\cdots +x_{n}f_{n} = \frac{\sum_{i=1}^{n}x_{i}\,n_{i}}{N}
+\end{equation}
+
+Varianza \cite{wiki-varianza}:
+\begin{equation}
+\operatorname{Var}(X) = \sigma^{2} = \operatorname{E}\left[(X - \mu)^{2}\right] = \operatorname{E}\left[(X - \operatorname{E}[X])^{2}\right]
+\end{equation}
+
+Desvío estándar:
+\begin{equation}
+\sigma = \sqrt{\operatorname{Var}(X)} = \sqrt{\operatorname{E}\left[(X - \operatorname{E}[X])^{2}\right]}
+\end{equation}
+
 \section{Gráficas}
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-frecuencia.tex}
@@ -65,7 +121,7 @@ Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosa
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-promedio.tex}
@@ -73,7 +129,7 @@ Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosa
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-desvio.tex}
@@ -81,7 +137,7 @@ Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosa
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-varianza.tex}
@@ -89,39 +145,48 @@ Más adelante, en algunas ruletas (sobre todo las que se usan en países anglosa
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-frecuencia-multi.tex}
     \caption{frecuencia relativa para 10 corridas del experimento}
+    \label{fig:tp1-frec-multi}
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-promedio-multi.tex}
     \caption{valor promedio para 10 corridas del experimento}
+    \label{fig:tp1-prom-multi}
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-desvio-multi.tex}
     \caption{valor del desvío para 10 corridas del experimento}
+    \label{fig:tp1-desvio-multi}
   \end{mytikzresize}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \begin{mytikzresize}{0.8\textwidth}
     \centering
     \input{generated/tp1-varianza-multi.tex}
     \caption{valor de la varianza para 10 corridas del experimento}
+    \label{fig:tp1-var-multi}
   \end{mytikzresize}
 \end{figure}
 
-%\bibliographystyle{unsrt}
-%\bibliography{references}
+\section{Conclusiones}
+
+En las gráficas se puede ver claramente cómo los valores obtenidos se aproximan a los valores teóricos esperados para una distribución uniforme discreta conforme se va incrementando el número de tiradas de la ruleta. Además, en las figuras \ref{fig:tp1-frec-multi}, \ref{fig:tp1-prom-multi}, \ref{fig:tp1-desvio-multi} y \ref{fig:tp1-var-multi} puede verse cómo los valores obtenidos caen todos alrededor de los valores esperados.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
 
 \end{document}
