@@ -45,8 +45,8 @@ def ruleta(n_min=0, n_max=36, max_size=5000, x=18, runs=10, seed=None):
     n = np.arange(1, max_size + 1)
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$f_{r}$ (frecuencia relativa)')
-    fig.ax.plot(n, freqs_list[0], label='$f_{{r}}$ (frecuencia relativa de ${}$)'.format(x))
-    fig.ax.plot(n, expected_freq, label='$f_{{r_{{e}}}}$ (frecuencia relativa esperada de ${}$)'.format(x), linestyle='dashed')
+    fig.ax.plot(n, freqs_list[0], label='$f_{r}$ (frecuencia relativa)')
+    fig.ax.plot(n, expected_freq, label='$f_{r_{e}}$ (frecuencia relativa esperada)', linestyle='dashed')
     fig.render(latexfile=latex.makefilepath(tp_latex, 'frecuencia.tex'))
 
     fig = SimpleFigure(xlabel='$n$ (número de tiradas)', ylabel='$v_{p}$ (valor promedio)')
